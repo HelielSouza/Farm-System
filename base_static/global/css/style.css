@@ -1,0 +1,108 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.center{
+    max-width: 1100px;
+    padding: 0 2%;
+    display: flex;
+    margin:0 auto;
+}
+
+header{
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 40px;
+}
+
+.logo{
+    color: white;
+    margin-top: 8px;
+}
+
+.menu-container{
+    width: 100%;
+    justify-content: space-between;
+}
+
+.menu-container a{
+    color: white;
+    display: inline-block;
+    margin: 0 10px;
+    text-decoration: none;
+    padding: 0px 10px;
+    line-height: 40px;
+    transition: 0.8s;
+}
+
+.menu-container a:hover{
+    color: #F5F5DC;
+}
+
+section.main{
+    position: relative;
+    min-height: 800px;
+    background-image: url('/media/images/agro.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.text-chamada{
+    color:#F5F5DC;
+    position: absolute;
+    bottom: 200px;
+    left: 100px;
+}
+
+.text-chamada h1{
+    font-size: 60px;
+}
+
+.text-chamada h3{
+    font-size: 30px;
+}
+
+section.produtos{
+    background-color:rgb(32, 31, 31);
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+}
+
+section.produtos h3{
+    text-transform: uppercase;
+}
+
+.produto-single table, th{
+    margin: 10px;
+    padding: 10px;
+    border: 3px solid white;
+    border-collapse: collapse;
+}
+
+.produto-single th, td{
+    background-color: #F5F5DC;
+    color:rgb(32, 31, 31);
+}
+
+.produto-container{
+    width: 100%;
+    justify-content: space-around;
+}
+
+footer{
+    background-color: green;
+    text-align: center;
+    padding: 8px;
+    color: white;
+}
+
+@media screen and (max-width: 768px){
+    .produto-container{
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
