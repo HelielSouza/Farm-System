@@ -16,40 +16,42 @@
             <h3><img src="/media/images/tractor.svg"></img>Agro</h3>
         </div>
         <div class="menu">
-            <a href="{% url 'products.dashboard' %}">Dashboard</a>
-            <a href="{% url 'products.cadastro' %}>Cadastro</a>
+            <a href="{% url 'products:dashboard' %}">Dashboard</a>
+            <a href="{% url 'products:cadastro' %}">Cadastro</a>
         </div>       
     </div>
+
     <div class="container">
         <div class="form-image">
             <img src="/media/images/treeforregister.svg"></img>
         </div>
-        
-        <div class="form">
-            <form action="#"> <!--aqui entra o backend-->
-            <div class="form-header">
-                <div class="title">            
-                    <h1>Cadastro</h1>
-                </div>                    
+    <div class="form">
+
+
+    <form method="post" action="{% url "products:cadastro_produto" %}"> 
+        {% csrf_token %}
+        <div class="form-header">
+            <div class="title">            
+                <h1>Cadastro</h1>
+            </div>                    
+        </div>
+        <div class="input-group">
+            <div class="input-box">
+                <label for="id_nome">Semente</label>
+                <input id="id_nome" type="text" name="nome" placeholder="Digite qual é a semente" required>
             </div>
-            <div class="input-group">
-                <div class="input-box">
-                    <label for="name">Semente</label>
-                    <input id="name" type="text" name="name" placeholder="Digite qual é a semente" required>
-                </div>
-                <div class="input-box">
-                    <label for="number">Graus Dia máximo</label>
-                    <input id="number" type="number" name="number" placeholder="Digite o Grau Dia máximo" required>
-                </div>
-                <div class="input-box">
-                    <label for="number">Graus Dia mínimo</label>
-                    <input id="number" type="number" name="number" placeholder="Digite o Grau Dia mínimo" required>
-                </div>
-            </div>                
-            <div class="continue-buttom">
-                <button><a href="#"><!--Confirmar Cadastro-->Confirmar</a></button>
+            <div class="input-box">
+                <label for="id_gd_max">Graus Dia máximo</label>
+                <input id="id_gd_max" type="number" name="gd_max" placeholder="Digite o Grau Dia máximo" required>
             </div>
-        </form>        
-    </div>        
-    
+            <div class="input-box">
+                <label for="id_gd_min">Graus Dia mínimo</label>
+                <input id="id_gd_min" type="number" name="gd_min" placeholder="Digite o Grau Dia mínimo" required>
+            </div>
+        </div>                
+        <div class="continue-buttom">
+            <button type="submit"><!--Confirmar Cadastro-->Confirmar</button>
+        </div>
+    </form>   
+
 </body>
