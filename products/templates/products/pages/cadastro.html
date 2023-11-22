@@ -15,10 +15,7 @@
         <div class="logo">
             <h3><img src="/media/images/tractor.svg"></img>Agro</h3>
         </div>
-        <div class="menu">
-            <a href="{% url 'products:dashboard' %}">Dashboard</a>
-            <a href="{% url 'products:cadastro' %}">Cadastro</a>
-        </div>       
+        {% include "global/partials/menu.html" %}       
     </div>
 
     <div class="container">
@@ -41,12 +38,16 @@
                 <input id="id_nome" type="text" name="nome" placeholder="Digite qual é a semente" required>
             </div>
             <div class="input-box">
-                <label for="id_gd_max">Graus Dia máximo</label>
+                <label for="id_gd_max">Graus Dia máximo acumulado</label>
                 <input id="id_gd_max" type="number" name="gd_max" placeholder="Digite o Grau Dia máximo" required>
             </div>
             <div class="input-box">
-                <label for="id_gd_min">Graus Dia mínimo</label>
+                <label for="id_gd_min">Graus Dia mínimo acumulado</label>
                 <input id="id_gd_min" type="number" name="gd_min" placeholder="Digite o Grau Dia mínimo" required>
+            </div>
+            <div class="input-box">
+                <label for="id_temp_basal">Temperatura basal</label>
+                <input id="id_temp_basal" type="number" name="temp_basal" placeholder="Digite a Temperatura basal" required>
             </div>
         </div>                
         <div class="continue-buttom">
