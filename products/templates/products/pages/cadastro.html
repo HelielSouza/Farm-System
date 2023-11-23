@@ -38,17 +38,25 @@
                 <input id="id_nome" type="text" name="nome" placeholder="Digite qual é a semente" required>
             </div>
             <div class="input-box">
-                <label for="id_gd_max">Graus Dia máximo acumulado</label>
-                <input id="id_gd_max" type="number" name="gd_max" placeholder="Digite o Grau Dia máximo" required>
+                <label for="id_gd_max">GD max acumulado</label>
+                <input id="id_gd_max" type="number" name="gd_max" placeholder="Digite o GD máximo" required>
             </div>
             <div class="input-box">
-                <label for="id_gd_min">Graus Dia mínimo acumulado</label>
-                <input id="id_gd_min" type="number" name="gd_min" placeholder="Digite o Grau Dia mínimo" required>
+                <label for="id_gd_min">GD mín acumulado</label>
+                <input id="id_gd_min" type="number" name="gd_min" placeholder="Digite o GD mínimo" required>
             </div>
             <div class="input-box">
                 <label for="id_temp_basal">Temperatura basal</label>
                 <input id="id_temp_basal" type="number" name="temp_basal" placeholder="Digite a Temperatura basal" required>
             </div>
+
+            <label for="id_sensor">Escolha o sensor em relação à área:</label>
+            <select id="id_sensor" name="sensor">
+                {% for sensor in sensores %}
+                    <option value="{{ sensor.id }}">{{ sensor.nome_sensor }}</option>
+                {% endfor %}
+            </select>
+
         </div>                
         <div class="continue-buttom">
             <button type="submit"><!--Confirmar Cadastro-->Confirmar</button>

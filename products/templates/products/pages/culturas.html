@@ -11,12 +11,10 @@
     
     </head>
     <body>
+        {% include "global/partials/menu_principal.html" %} <!-- Menu parcial -->
         
-        {% include "global/partials/menu_principal.html" %}  <!-- Menu parcial -->
-
-        {% include "products/partials/card_cultura.html" %}  <!-- card parcial -->
-        {% include "products/partials/card_cultura.html" %}
-        {% include "products/partials/card_cultura.html" %}
-            
+        {% for cultura in culturas %}
+            {% include "products/partials/card_cultura.html" %}  <!-- card parcial -->
+        {% endfor %}
     </body>
 </html>

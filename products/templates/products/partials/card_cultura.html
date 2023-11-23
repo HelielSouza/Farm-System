@@ -1,13 +1,14 @@
 <div class="row">
     <div class="card">
-        <h2><strong>Título</strong></h2>
-        <p>Temperatura Mínima (Colheita): <!--Temperatura Mínima p/ colheita--></p>
-        <p>Temperatura Máxima (Colheita): <!--Temperatura Máxima p/ colheita--></p>
-        <p>Temperatura Basal: <!--Temperatura Basal--></p>
+        <h2><strong>{{ cultura.nome_produto }}</strong></h2>
+        <p>Temperatura Mínima (Colheita): </p> {{cultura.gd_maximo_acum}} C°
+        <p>Temperatura Máxima (Colheita): </p> {{cultura.gd_minimo_acum}} C°
+        <p>Temperatura Basal: </p> {{cultura.temp_basal }} C°
+        <p>Sensor utilizado: </p> {{cultura.fk_sensor }}
         <div class="card-content">
             <div class="left-content">
                 <div class="botao">
-                    <a href="dashboard.html">Consultar</a> <!--#C aminho para o dashboard-->
+                    <a href= {% url "products:dashboard" id=cultura.id %}>Consultar</a> <!--#C aminho para o dashboard-->
                 </div>
             </div>
             <div class="right-content">

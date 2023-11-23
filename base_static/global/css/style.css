@@ -44,7 +44,7 @@ header{
 
 section.main{
     position: relative;
-    min-height: 800px;
+    min-height: 618px;
     background-image: url('/media/images/agro.jpeg');
     background-size: cover;
     background-position: center;

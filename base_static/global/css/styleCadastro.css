@@ -39,17 +39,22 @@ body {
 
 .form {    
     width: 50%;
-    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: white;
-    padding: 3rem;
+    padding: 0.5rem;
 }
 
 .form-header {
     margin-bottom: 3rem;
     display: flex;
+    align-items: center;
+}
+.form-header .title {
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
 }
 
 .form-header h1::after {
@@ -67,13 +72,16 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 1rem 0;
+    padding: 1rem 0.8rem;
 }
 
 .input-box {
     display: flex;
     flex-direction: column;
     margin-bottom: 1.1rem;
+}
+.input-box label {
+   min-width: 15rem;
 }
 
 .input-box input {

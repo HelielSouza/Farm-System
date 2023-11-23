@@ -7,6 +7,9 @@ from django.utils import timezone
 class Sensor(models.Model):
     nome_sensor = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.nome_sensor
+
 
 class CulturaPlantacao(models.Model):
     nome_produto = models.CharField(max_length=100)
