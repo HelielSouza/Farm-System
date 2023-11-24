@@ -17,14 +17,16 @@
                 </tr>
             </thead>
             <tbody>                    
-                <tr>
-                    <td>Data valor</td>
-                    <td>gd</td>
-                    <td>Valor</td>
-                    <td>Valor</td>
-                    <td>Valor</td>
-                    <td>Valor</td>
-                </tr>  
+                {% for data_row in data_to_render %}
+                    <tr>
+                        <td>{{ data_row.0.data_gd }}</td>
+                        <td>{{ data_row.0.valor_gd }}</td>
+                        <td>{{ data_row.1.soma_atual }} C°</td>
+                        <td>{{ data_row.0.temperatura_max }} C°</td> <!-- Adicione a lógica para temperatura máxima -->
+                        <td>{{ data_row.0.temperatura_min }} C°</td> <!-- Adicione a lógica para temperatura mínima -->
+                        <td>{{ data_row.2.data_previsao }}</td>
+                    </tr>  
+                {% endfor %}
             </tbody>
         </table>
     </div>

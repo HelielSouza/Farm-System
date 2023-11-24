@@ -38,7 +38,10 @@ def calcular_gd(sender, instance, **kwargs):
             cultura.temp_basal
 
         # Salva o GD na tabela GD com a data de inserção
-        GD.objects.create(valor_gd=gd, fk_cultura=cultura)
+        GD.objects.create(valor_gd=gd,
+                          fk_cultura=cultura,
+                          temperatura_max=temperatura_maior,
+                          temperatura_min=temperatura_menor)
 
 
 @receiver(post_save, sender=GD)

@@ -30,6 +30,8 @@ class GD(models.Model):
     valor_gd = models.FloatField()
     fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
     data_gd = models.DateField(auto_now_add=True)
+    temperatura_max = models.FloatField(default=0.0)
+    temperatura_min = models.FloatField(default=0.0)
 
 
 class SomaTermica(models.Model):

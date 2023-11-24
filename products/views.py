@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .models import CulturaPlantacao, Sensor
+from .models import GD, CulturaPlantacao, Previsao, Sensor, SomaTermica
 
 
 def home(request):
@@ -45,7 +45,15 @@ def culturas(request):
 
 def dashboard(request, id):
     cultura_dashboard = CulturaPlantacao.objects.get(pk=id)
+    grau_dia_valores = GD.objects.filter(fk_cultura=cultura_dashboard)
+    soma_termica_valores = SomaTermica.objects.filter(
+        fk_cultura=cultura_dashboard)
+    previsao_valores = Previsao.objects.filter(fk_cultura=cultura_dashboard)
+
+    data_to_render = zip(
+        grau_dia_valores, soma_termica_valores, previsao_valores)
 
     return render(request, 'products/pages/dashboard.html', {
         'cultura_dashboard': cultura_dashboard,
+        'data_to_render': data_to_render,
     })
