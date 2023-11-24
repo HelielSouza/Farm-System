@@ -28,3 +28,20 @@ class GD(models.Model):
     valor_gd = models.FloatField()
     fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
     data_gd = models.DateField(auto_now_add=True)
+
+
+class SomaTermica(models.Model):
+    soma_atual = models.FloatField()
+    fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
+
+
+class MediaGD(models.Model):
+    valor_media = models.FloatField()
+    fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
+    data = models.DateTimeField(auto_now_add=True)
+
+
+class Previsao(models.Model):
+    valor_previsao = models.FloatField()
+    fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
+    data_previsao = models.DateTimeField()
