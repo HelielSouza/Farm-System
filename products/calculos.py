@@ -6,8 +6,8 @@ from django.db.models import Count
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from models import (GD, CulturaPlantacao, MediaGD, Previsao, SomaTermica,
-                    Temperatura)
+from .models import (GD, CulturaPlantacao, MediaGD, Previsao, SomaTermica,
+                     Temperatura)
 
 
 @receiver(post_save, sender=Temperatura)

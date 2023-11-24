@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 # Create your models here.
@@ -44,4 +46,4 @@ class MediaGD(models.Model):
 class Previsao(models.Model):
     valor_previsao = models.FloatField()
     fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
-    data_previsao = models.DateTimeField()
+    data_previsao = models.DateTimeField(default=datetime.datetime(2023, 1, 1))
