@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 # Create your models here.
 
@@ -22,4 +21,10 @@ class CulturaPlantacao(models.Model):
 class Temperatura(models.Model):
     fk_sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
     temperatura = models.FloatField(default=0.0)
-    data = models.DateField(default=timezone.now)
+    data = models.DateField(auto_now_add=True)
+
+
+class GD(models.Model):
+    valor_gd = models.FloatField()
+    fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
+    data_gd = models.DateField(auto_now_add=True)
