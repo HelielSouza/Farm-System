@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .models import GD, CulturaPlantacao, Previsao, Sensor, SomaTermica
+from .models import (TESTEGD, CulturaPlantacao, Sensor, TESTECulturaPlantacao,
+                     TESTEPrevisao, TESTESomaTermica)
 
 
 def home(request):
@@ -43,12 +44,33 @@ def culturas(request):
                   {'culturas': culturas})
 
 
-def dashboard(request, id):
+# DASHBOARD ORIGINAL
+"""def dashboard(request, id):
     cultura_dashboard = CulturaPlantacao.objects.get(pk=id)
     grau_dia_valores = GD.objects.filter(fk_cultura=cultura_dashboard)
     soma_termica_valores = SomaTermica.objects.filter(
         fk_cultura=cultura_dashboard)
     previsao_valores = Previsao.objects.filter(fk_cultura=cultura_dashboard)
+
+    data_to_render = zip(
+        grau_dia_valores, soma_termica_valores, previsao_valores)
+
+    return render(request, 'products/pages/dashboard.html', {
+        'cultura_dashboard': cultura_dashboard,
+        'data_to_render': data_to_render,
+    })
+"""
+
+# DASHBOARD TESTE
+
+
+def dashboard(request, id):
+    cultura_dashboard = TESTECulturaPlantacao.objects.get(pk=id)
+    grau_dia_valores = TESTEGD.objects.filter(fk_cultura=cultura_dashboard)
+    soma_termica_valores = TESTESomaTermica.objects.filter(
+        fk_cultura=cultura_dashboard)
+    previsao_valores = TESTEPrevisao.objects.filter(
+        fk_cultura=cultura_dashboard)
 
     data_to_render = zip(
         grau_dia_valores, soma_termica_valores, previsao_valores)
