@@ -38,7 +38,7 @@ def cadastro_produto(request):
 
 
 def culturas(request):
-    culturas = CulturaPlantacao.objects.all()
+    culturas = TESTECulturaPlantacao.objects.all()
 
     return render(request, 'products/pages/culturas.html',
                   {'culturas': culturas})

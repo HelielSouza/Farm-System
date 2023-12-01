@@ -24,7 +24,7 @@ class CulturaPlantacao(models.Model):
 class Temperatura(models.Model):
     fk_sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
     temperatura = models.FloatField(default=0.0)
-    data = models.DateTimeField(auto_now_add=True)
+    data = models.DateTimeField(default=datetime(2023, 1, 1))
 
 
 class GD(models.Model):
@@ -38,21 +38,23 @@ class GD(models.Model):
 class SomaTermica(models.Model):
     soma_atual = models.FloatField()
     fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
-    data_insercao = models.DateTimeField(default=datetime.now)
+    data_insercao = models.DateTimeField(default=timezone.now)
 
 
 class MediaGD(models.Model):
     valor_media = models.FloatField()
     fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
     data = models.DateTimeField(default=datetime.now)
-    data_insercao = models.DateTimeField(default=datetime.now)
+    data_insercao = models.DateTimeField(default=timezone.now)
 
 
 class Previsao(models.Model):
     valor_previsao = models.FloatField()
     fk_cultura = models.ForeignKey(CulturaPlantacao, on_delete=models.CASCADE)
-    data_previsao = models.DateTimeField(default=datetime.now)
-    data_insercao = models.DateTimeField(default=datetime.now)
+    data_previsao = models.DateTimeField(default=datetime(2023, 1, 1))
+    data_insercao = models.DateTimeField(default=timezone.now)
+
+# classes testes
 
 
 class TESTESensor(models.Model):
