@@ -23,12 +23,12 @@ def teste_calcular_gd(sender, instance, **kwargs):
     ).aggregate(Count('id'))['id__count']
 
     # Verifica se o número total de registros é um múltiplo de 24
-    if total_registros % 10 == 0:
+    if total_registros % 24 == 0:
         # Obtém os últimos 24 registros de temperatura para
         # a cultura e sensor específicos
         ultimas_temperaturas = TESTETemperatura.objects.filter(
             fk_sensor=instance.fk_sensor
-        ).order_by('-data')[:10]
+        ).order_by('-data')[:24]
 
         # Verifica a cultura associada ao sensor
         cultura = TESTECulturaPlantacao.objects.get(
@@ -57,7 +57,7 @@ post_save.connect(teste_calcular_gd, sender=TESTETemperatura)
 
 
 def teste_soma_termica(sender, instance, **kwargs):
-    print("soma termica GD - Sinal acionado!")
+    print("\nSoma termica GD - Sinal acionado!")
     # Verifica se já existem registros para a cultura associada
     if TESTESomaTermica.objects.filter(fk_cultura=instance.fk_cultura).exists():  # noqa E501
         # Recupera o último valor de soma térmica
@@ -84,7 +84,7 @@ post_save.connect(teste_soma_termica, sender=TESTEGD)
 
 # @receiver(post_save, sender=TESTEGD)
 def teste_calcular_media_gd(sender, instance, **kwargs):
-    print("MEDIA GD - Sinal acionado!")
+    print("\nMEDIA GD - Sinal acionado!")
     # Recupera todos os valores de GD para a cultura específica
     gd_values = TESTEGD.objects.filter(
         fk_cultura=instance.fk_cultura).values_list('valor_gd', flat=True)
@@ -104,7 +104,7 @@ post_save.connect(teste_calcular_media_gd, sender=TESTEGD)
 
 # @receiver(post_save, sender=TESTEMediaGD)
 def teste_calcular_previsao(sender, instance, **kwargs):
-    print("PREVISAO - Sinal acionado!")
+    print("\nPREVISAO - Sinal acionado!")
     # Obtém a cultura associada à média
     cultura = TESTECulturaPlantacao.objects.get(pk=instance.fk_cultura.pk)
 

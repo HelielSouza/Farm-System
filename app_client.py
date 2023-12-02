@@ -1,7 +1,8 @@
+
 import json
 import os
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 
 import django
 import paho.mqtt.client as mqtt
@@ -11,7 +12,6 @@ from counterfit_shims_seeed_python_dht import DHT
 # inicialização do django para esse arquivo unico
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
 django.setup()
-
 
 formatted_datetime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -40,21 +40,25 @@ while True:
 
         # salvamento no banco de dados
         try:
-            from products.models import TESTETemperatura
+            from products.models import Temperatura
 
-            TESTETemperatura.objects.create(
-                temperatura=temperature1, fk_sensor_id=1, data=datetime.now()
+            Temperatura.objects.create(
+                temperatura=temperature1,
+                fk_sensor_id=1,
+                data=datetime.now(timezone.utc)
             )
-            TESTETemperatura.objects.create(
-                temperatura=temperature2, fk_sensor_id=2, data=datetime.now()
+            Temperatura.objects.create(
+                temperatura=temperature2,
+                fk_sensor_id=2,
+                data=datetime.now(timezone.utc)
             )
         except Exception as e:
             print(f"Erro desconhecido ao salvar no banco de dados: {e}")
 
         print(f'Temperature Sensor 1: {temperature1}°C ')
-        print(f'Temperature Sensor 2: {temperature2}°C ')
+        print(f'Temperature Sensor 2: {temperature2}°C \n')
 
-        time.sleep(1)
+        time.sleep(2)
 
     except Exception as e:
         print(f"Erro na captação: {e}")

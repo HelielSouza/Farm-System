@@ -6,4 +6,4 @@ class ProductsConfig(AppConfig):
     name = 'products'
 
     def ready(self):
-        import products.teste_calculos
+        import products.calculos

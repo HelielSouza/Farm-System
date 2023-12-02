@@ -1,8 +1,7 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .models import (TESTEGD, CulturaPlantacao, Sensor, TESTECulturaPlantacao,
-                     TESTEPrevisao, TESTESomaTermica)
+from .models import GD, CulturaPlantacao, Previsao, Sensor, SomaTermica
 
 
 def home(request):
@@ -38,14 +37,14 @@ def cadastro_produto(request):
 
 
 def culturas(request):
-    culturas = TESTECulturaPlantacao.objects.all()
+    culturas = CulturaPlantacao.objects.all()
 
     return render(request, 'products/pages/culturas.html',
                   {'culturas': culturas})
 
 
 # DASHBOARD ORIGINAL
-"""def dashboard(request, id):
+def dashboard(request, id):
     cultura_dashboard = CulturaPlantacao.objects.get(pk=id)
     grau_dia_valores = GD.objects.filter(fk_cultura=cultura_dashboard)
     soma_termica_valores = SomaTermica.objects.filter(
@@ -59,11 +58,11 @@ def culturas(request):
         'cultura_dashboard': cultura_dashboard,
         'data_to_render': data_to_render,
     })
-"""
+
 
 # DASHBOARD TESTE
 
-
+"""
 def dashboard(request, id):
     cultura_dashboard = TESTECulturaPlantacao.objects.get(pk=id)
     grau_dia_valores = TESTEGD.objects.filter(fk_cultura=cultura_dashboard)
@@ -79,3 +78,4 @@ def dashboard(request, id):
         'cultura_dashboard': cultura_dashboard,
         'data_to_render': data_to_render,
     })
+"""
