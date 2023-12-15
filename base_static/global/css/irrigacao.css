@@ -89,11 +89,20 @@ body {
     transform: translateY(-5px);
     cursor: pointer;
 }
-
-.card p {
+.p-sty {
     color: #a3a5ae;
     font-size: 16px;
+}
+.p-style-l {
+    font-size: 16px;
     margin-left: 15px;
+    color: green;
+}
+
+.p-style-d {
+    font-size: 16px;
+    margin-left: 15px;
+    color: red;
 }
 
 .image {

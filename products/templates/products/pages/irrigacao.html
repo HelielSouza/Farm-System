@@ -22,24 +22,24 @@
         <div class="row">
             <div class="card">
                 <h2><strong>Estado</strong></h2>
-                <p>No atual momento a irrigação está:</p>   
+                <p  class="p-sty">No atual momento a irrigação está:</p>   
                 <br>         
                 <br>
                 <div class="card-content">                
                     <div class="right-content">
                         {% if sensor_valor <= 450 %}
                             <img class="image" src="/media/images/torneira.png" alt="Ícone de torneira aberta" style="color: blue;"/>
-                            <p class="p-sty">IRRIGADOR LIGADO! A umidade do solo está baixa</p>
+                            <p class="p-style-l">IRRIGADOR LIGADO!</p> <p class="p-sty">A umidade do solo está baixo</p>
                         {% else %}
                             <img class="image" src="/media/images/torneira-fechada.png" alt="Ícone de torneira fechada" style="color: blue;"/>
-                            <p class = "p-sty">IRRIGADOR DESLIGADO! A umidade do solo está alta</p>
+                            <p class = "p-style-d">IRRIGADOR DESLIGADO!</p> <p class="p-sty">A umidade do solo está alta</p>
                         {% endif %}
                     </div>
                 </div>
             </div>
             <div class="card2">
                 <h2><strong>Registro</strong></h2>
-                <p>Consulte como anda a irrigação dessa cultura por meio de um gráfico de colunas.</p>            
+                <p class="p-sty">Consulte como anda a irrigação dessa cultura por meio de um gráfico de colunas.</p>            
                 <div class="card-content">
                     <div class="left-content">
                         <div class="botao">
@@ -53,6 +53,7 @@
             </div>
             
         </div>
+        <!--
         <div class="previsao">
             <div class="card3">
                 <div class="card-content">
@@ -66,6 +67,7 @@
                 </div>
             </div>
         </div>
+        -->
     </div>
 </body>
 </html>
