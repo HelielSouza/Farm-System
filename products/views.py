@@ -1,15 +1,18 @@
+from .models import (GD, CulturaPlantacao, Previsao, Sensor, SomaTermica,
+                     UmidadeValores)
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from django.urls import reverse
+from django.shortcuts import redirect, render
+from django.db.models.functions import TruncDate
+from django.db.models import Count
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import base64
 import io
 
-import matplotlib.dates as mdates
-import matplotlib.pyplot as plt
-from django.db.models import Count
-from django.db.models.functions import TruncDate
-from django.shortcuts import redirect, render
-from django.urls import reverse
+import matplotlib
 
-from .models import (GD, CulturaPlantacao, Previsao, Sensor, SomaTermica,
-                     UmidadeValores)
+matplotlib.use('Agg')
 
 
 def home(request):
@@ -98,7 +101,8 @@ def grafico_cultura(request, id):
 
     # Salvar o gráfico em um buffer
     buf = io.BytesIO()
-    plt.savefig(buf, format='png')
+    canvas = FigureCanvas(fig)
+    canvas.print_png(buf)
     plt.close()
 
     # Codificar a imagem para base64
@@ -159,7 +163,8 @@ def grafico_irrigacao(request):
 
     # Converte o gráfico em uma resposta HTTP
     buf = io.BytesIO()
-    plt.savefig(buf, format='png')
+    canvas = FigureCanvas(fig)
+    canvas.print_png(buf)
     plt.close()
 
     imagem_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
