@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'global/css/grafico.css' %}"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" rel="stylesheet"/>
-    <title>Tabela</title>
+    <title>Gráfico cultura</title>
 </head>
 <body>
     {% include "global/partials/menu_principal.html" %}
@@ -15,15 +15,16 @@
     <div class="container">
         
         <div class="title">
-            <h2 class="h2-titulo">Gráficos relacionados a cultura "{{cultura_opcoes.nome_produto}}"</h2>
+            <h2 class="h2-titulo">Gráfico de grau-dia da cultura "{{cultura_opcoes.nome_produto}}"</h2>
         </div>
         <br>
-        <br>
+        
         <div class="grafico">
-            <!--Adicionar gráfico-->
+            <img src="data:image/png;base64,{{ imagem_base64 }}" alt="Gráfico da Cultura" />
         </div>
 
     </div>
+
     
 
 </body>

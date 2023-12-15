@@ -14,7 +14,7 @@
     {% include "global/partials/menu_principal.html" %}
 
     <div class="title">
-        <h2 class="h2-titulo">Informações de irrigação da cultura "{{cultura_opcoes.nome_produto }}"</h2><!--Nome da cultura-->
+        <h2 class="h2-titulo">Informações de irrigação da sua fazenda</h2><!--Nome da cultura-->
     </div>
         <br>
         <br>
@@ -27,8 +27,13 @@
                 <br>
                 <div class="card-content">                
                     <div class="right-content">
-                        <img class="image" src="/media/images/torneira.png" alt="Ícone de torneira" style="color: blue;"/>
-                        <img class="image" src="/media/images/torneira-fechada.png" alt="Ícone de torneira" style="color: blue;"/>
+                        {% if sensor_valor <= 450 %}
+                            <img class="image" src="/media/images/torneira.png" alt="Ícone de torneira aberta" style="color: blue;"/>
+                            <p class="p-sty">IRRIGADOR LIGADO! A umidade do solo está baixa</p>
+                        {% else %}
+                            <img class="image" src="/media/images/torneira-fechada.png" alt="Ícone de torneira fechada" style="color: blue;"/>
+                            <p class = "p-sty">IRRIGADOR DESLIGADO! A umidade do solo está alta</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -38,7 +43,7 @@
                 <div class="card-content">
                     <div class="left-content">
                         <div class="botao">
-                            <a href="graficoIrrigacao.html">Consultar</a> 
+                            <a href="{% url "products:grafico_irrigacao"%}">Consultar</a> 
                         </div>
                     </div>
                     <div class="right-content">

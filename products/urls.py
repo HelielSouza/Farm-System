@@ -14,6 +14,8 @@ urlpatterns = [
     path('tabela/<int:id>/', views.tabela, name='tabela'),
     path('grafico-cultura/<int:id>/',
          views.grafico_cultura, name='grafico_cultura'),
-    path('irrigacao/<int:id>/', views.irrigacao, name='irrigacao'),
+    path('irrigacao/', views.irrigacao, name='irrigacao'),
+    path('grafico-irrigacao/', views.grafico_irrigacao,
+         name='grafico_irrigacao'),
 
 ]

@@ -1,38 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/dashboard.css"/>
+    <link rel="stylesheet" href="{% static 'global/css/grafico_irrigacao.css' %}"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" rel="stylesheet"/>
-    <title>Tabela</title>
+    <title>Gráfico irrigação</title>
 </head>
 <body>
-    <div class="appbar">
-        <div class="logo">
-            <h3><img src="assets/images/tractor.svg"></img>Agro</h3>
-        </div>
-        <div class="menu">
-            <a href="index.html">Home</a>
-            <a href="cadastro.html">Cadastro</a>
-            <a href="culturas.html">Culturas</a>
-        </div>
-    </div>
+    {% include "global/partials/menu_principal.html" %}
 
     <div class="container">
         
         <div class="title">
-            <h1>Título</h1>
+            <h2 class="h2-titulo"></h1>
+
         </div>
-        <br>
-        <br>
+
         <div class="grafico">
-            <!--Adicionar gráfico de irrigação-->
+            <img src="data:image/png;base64,{{ imagem_base64 }}" alt="Gráfico de irri" />
+        
         </div>
 
     </div>
     
-
 </body>
 </html>

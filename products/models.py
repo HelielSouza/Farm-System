@@ -54,6 +54,22 @@ class Previsao(models.Model):
     data_previsao = models.DateTimeField(default=datetime(2023, 1, 1))
     data_insercao = models.DateTimeField(default=timezone.now)
 
+
+class UmidadeValores(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True)
+    umidade = models.IntegerField()
+    rele_ligado = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        # Verifica se a umidade é menor que 450 e atualiza o estado do relé
+        if self.umidade < 450:
+            self.rele_ligado = True
+        else:
+            self.rele_ligado = False
+
+        super().save(*args, **kwargs)
+
+
 # classes testes
 
 

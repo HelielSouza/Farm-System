@@ -1,7 +1,15 @@
+import base64
+import io
+
+import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+from django.db.models import Count
+from django.db.models.functions import TruncDate
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .models import GD, CulturaPlantacao, Previsao, Sensor, SomaTermica
+from .models import (GD, CulturaPlantacao, Previsao, Sensor, SomaTermica,
+                     UmidadeValores)
 
 
 def home(request):
@@ -69,24 +77,101 @@ def opcoes(request, id):
 
 
 def grafico_cultura(request, id):
-    cultura_opcoes = CulturaPlantacao.objects.get(pk=id)
+    cultura = CulturaPlantacao.objects.get(pk=id)
 
-    return render(request, 'products/pages/grafico_cultura.html', {
-        'cultura_opcoes': cultura_opcoes,
-    })
+    # Consulta ao banco de dados para obter dados da tabela GD associados
+    dados_gd = GD.objects.filter(fk_cultura=cultura)
+
+    # Adicione este print para verificar os dados
+    for gd in dados_gd:
+        print(f'Data: {gd.data_gd}, Valor: {gd.valor_gd}')
+
+    datas = [gd.data_gd.strftime('%Y-%m-%d') for gd in dados_gd]
+    valores = [gd.valor_gd for gd in dados_gd]
+    # Criar um gráfico de barras usando o matplotlib
+
+    fig, ax = plt.subplots()
+    ax.bar(datas, valores)
+    ax.set_xlabel('Data GD')
+    ax.set_ylabel('Valor GD')
+    ax.set_title('Gráfico de Cultura')
+
+    # Salvar o gráfico em um buffer
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close()
+
+    # Codificar a imagem para base64
+    imagem_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
+
+    # Passe a imagem para a página HTML
+    return render(request, 'products/pages/grafico_cultura.html',
+                  {'imagem_base64': imagem_base64,
+                   'cultura_opcoes': cultura,
+                   }
+                  )
 
 
-def irrigacao(request, id):
-    cultura_opcoes = CulturaPlantacao.objects.get(pk=id)
+def irrigacao(request):
+
+    ultimo_valor = UmidadeValores.objects.latest(
+        'timestamp')  # Obtenha o valor mais recente do sensor
 
     return render(request, 'products/pages/irrigacao.html', {
-        'cultura_opcoes': cultura_opcoes,
+        'sensor_valor': ultimo_valor.umidade,
     })
+
+
+def grafico_irrigacao(request):
+    # Consulta para obter a contagem de irrigações ligadas por dia
+    irrigacoes_por_dia = UmidadeValores.objects.filter(rele_ligado=True).annotate(  # noqa51
+        data=TruncDate('timestamp')).values('data').annotate(Count('id'))
+
+    # Preparação dos dados para o gráfico
+    datas = [irrigacao['data'] for irrigacao in irrigacoes_por_dia]
+    contagens = [irrigacao['id__count'] for irrigacao in irrigacoes_por_dia]
+
+    # Criação do gráfico de barras
+    # Ajuste o tamanho conforme necessário
+    fig, ax = plt.subplots()
+
+    # Configuração do eixo x
+    ax.bar(datas, contagens, width=0.8, align='center')
+
+    # Formato de data para exibir no eixo x
+    date_format = mdates.DateFormatter('%Y-%m-%d')
+
+    # Ajusta as configurações do eixo x
+    ax.xaxis.set_major_formatter(date_format)
+    ax.xaxis.set_major_locator(mdates.DayLocator(
+        interval=1))  # Ajusta a cada 1 dia
+
+    # Rotaciona os rótulos do eixo x para melhor legibilidade
+    plt.xticks(rotation=45, ha='right')
+
+    # Configurações adicionais (opcional)
+    ax.set_xlabel('Data')
+    ax.set_ylabel('Quantidade de Vezes Ligado')
+    ax.set_title('Quantidade de Vezes que o Irrigador Foi Ligado por Dia')
+
+    # Ajuste do layout para garantir que toda a imagem seja exibida
+    plt.tight_layout()
+
+    # Converte o gráfico em uma resposta HTTP
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close()
+
+    imagem_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
+
+    return render(request, 'products/pages/grafico_irrigacao.html',
+                  {'imagem_base64': imagem_base64,
+
+                   }
+                  )
 
 
 # DASHBOARD TESTE
-
-
 """
 def dashboard(request, id):
     cultura_dashboard = TESTECulturaPlantacao.objects.get(pk=id)
