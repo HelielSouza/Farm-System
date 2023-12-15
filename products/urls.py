@@ -10,5 +10,10 @@ urlpatterns = [
     # salvar no bd os produtos
     path('cadastro/produto/', views.cadastro_produto, name='cadastro_produto'),
     path('culturas/', views.culturas, name='culturas'),
-    path('dashboard/<int:id>/', views.dashboard, name='dashboard'),
+    path('opcoes/<int:id>/', views.opcoes, name='opcoes'),
+    path('tabela/<int:id>/', views.tabela, name='tabela'),
+    path('grafico-cultura/<int:id>/',
+         views.grafico_cultura, name='grafico_cultura'),
+    path('irrigacao/<int:id>/', views.irrigacao, name='irrigacao'),
+
 ]

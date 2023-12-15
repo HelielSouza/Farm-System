@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/opcoes.css' %}" />
+    <link href="https://cdnjs.cloudflare.com/ajax?libs/font-awesome/6.1.0/css/all.min.css" rel="stylesheet" />
+    <title>Opções</title>
+
+</head>
+
+<body>
+    {% include "global/partials/menu_principal.html" %}
+
+    <div class="row">
+        <div class="card">
+            <h2><strong>Tabela</strong></h2>
+            <p>Consulte os dados da cultura por meio de tabela.</p>
+            <div class="card-content">
+                <div class="left-content">
+                    <div class="botao">
+                        <a href="{% url "products:tabela" id=cultura_opcoes.id %}">Consultar</a>
+                        <!--#Caminho para a tabela-->
+                    </div>
+                </div>
+                <div class="right-content">
+                    <img class="image" src="/media/images/tabela.png" alt="Ícone de tabela" style="color: rgb(0, 0, 128);" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card2">
+            <h2><strong>Gráfico</strong></h2>
+            <p>Consulte os dados da cultura por meio de um gráfico de colunas.</p>
+            <div class="card-content">
+                <div class="left-content">
+                    <div class="botao">
+                        <a href="{% url "products:grafico_cultura" id=cultura_opcoes.id %}">Consultar</a>
+                        <!--#Caminho para os gráfico-->
+                    </div>
+                </div>
+                <div class="right-content">
+                    <img class="image" src="/media/images/grafico-de-barras.png" alt="Ícone de tabela"
+                        style="color: yellow;" />
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="card3">
+            <h2><strong>Irrigação</strong></h2>
+            <p>Consulte como anda a irrigação de sua fazenda, não perca nada.</p>
+            <div class="card-content">
+                <div class="left-content">
+                    <div class="botao">
+                        <a href="{% url "products:irrigacao" id=cultura_opcoes.id %}">Consultar</a>
+                        <!--#Caminho para a irrigação-->
+                    </div>
+                </div>
+                <div class="right-content">
+                    <img class="image" src="/media/images/regando-plantas.png" alt="Ícone de tabela"
+                        style="color: rgb(0, 102, 170);" />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

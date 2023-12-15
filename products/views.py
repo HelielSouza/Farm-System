@@ -43,24 +43,49 @@ def culturas(request):
                   {'culturas': culturas})
 
 
-# DASHBOARD ORIGINAL
-def dashboard(request, id):
-    cultura_dashboard = CulturaPlantacao.objects.get(pk=id)
-    grau_dia_valores = GD.objects.filter(fk_cultura=cultura_dashboard)
+# DASHBOARD ORIGINAL *vai ser mudado para TABELA
+def tabela(request, id):
+    cultura_tabela = CulturaPlantacao.objects.get(pk=id)
+    grau_dia_valores = GD.objects.filter(fk_cultura=cultura_tabela)
     soma_termica_valores = SomaTermica.objects.filter(
-        fk_cultura=cultura_dashboard)
-    previsao_valores = Previsao.objects.filter(fk_cultura=cultura_dashboard)
+        fk_cultura=cultura_tabela)
+    previsao_valores = Previsao.objects.filter(fk_cultura=cultura_tabela)
 
     data_to_render = zip(
         grau_dia_valores, soma_termica_valores, previsao_valores)
 
-    return render(request, 'products/pages/dashboard.html', {
-        'cultura_dashboard': cultura_dashboard,
+    return render(request, 'products/pages/tabela.html', {
+        'cultura_tabela': cultura_tabela,
         'data_to_render': data_to_render,
     })
 
 
+def opcoes(request, id):
+    cultura_opcoes = CulturaPlantacao.objects.get(pk=id)
+
+    return render(request, 'products/pages/opcoes.html', {
+        'cultura_opcoes': cultura_opcoes,
+    })
+
+
+def grafico_cultura(request, id):
+    cultura_opcoes = CulturaPlantacao.objects.get(pk=id)
+
+    return render(request, 'products/pages/grafico_cultura.html', {
+        'cultura_opcoes': cultura_opcoes,
+    })
+
+
+def irrigacao(request, id):
+    cultura_opcoes = CulturaPlantacao.objects.get(pk=id)
+
+    return render(request, 'products/pages/irrigacao.html', {
+        'cultura_opcoes': cultura_opcoes,
+    })
+
+
 # DASHBOARD TESTE
+
 
 """
 def dashboard(request, id):

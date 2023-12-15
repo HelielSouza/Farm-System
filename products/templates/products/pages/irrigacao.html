@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/irrigacao.css' %}"/>
+    <link href="https://cdnjs.cloudflare.com/ajax?libs/font-awesome/6.1.0/css/all.min.css" rel="stylesheet"/>
+    <title>Irrigação</title>
+   
+</head>
+<body>
+    {% include "global/partials/menu_principal.html" %}
+
+    <div class="title">
+        <h2 class="h2-titulo">Informações de irrigação da cultura "{{cultura_opcoes.nome_produto }}"</h2><!--Nome da cultura-->
+    </div>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="card">
+                <h2><strong>Estado</strong></h2>
+                <p>No atual momento a irrigação está:</p>   
+                <br>         
+                <br>
+                <div class="card-content">                
+                    <div class="right-content">
+                        <img class="image" src="/media/images/torneira.png" alt="Ícone de torneira" style="color: blue;"/>
+                        <img class="image" src="/media/images/torneira-fechada.png" alt="Ícone de torneira" style="color: blue;"/>
+                    </div>
+                </div>
+            </div>
+            <div class="card2">
+                <h2><strong>Registro</strong></h2>
+                <p>Consulte como anda a irrigação dessa cultura por meio de um gráfico de colunas.</p>            
+                <div class="card-content">
+                    <div class="left-content">
+                        <div class="botao">
+                            <a href="graficoIrrigacao.html">Consultar</a> 
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <img class="image" src="/media/images/grafico-de-barras.png" alt="Ícone de grafico" style="color: blue;"/>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="previsao">
+            <div class="card3">
+                <div class="card-content">
+                    <div class="left-content">
+                        <p>Previsão do tempo: </p>
+                    </div>
+                    <div class="right-content">
+                        <img class="image" src="/media/images/ensolarado.png" alt="Ícone de sol" style="color: yellow;"/>
+                        <img class="image" src="/media/images/gota-de-chuva.png" alt="Ícone de chuva" style="color: blue;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
