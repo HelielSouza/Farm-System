@@ -8,7 +8,46 @@
     <link rel="stylesheet" href="{% static 'global/css/irrigacao.css' %}"/>
     <link href="https://cdnjs.cloudflare.com/ajax?libs/font-awesome/6.1.0/css/all.min.css" rel="stylesheet"/>
     <title>Irrigação</title>
-   
+
+    <!-- Adicione isso ao início do seu arquivo HTML -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        function atualizarDadosIrrigacao() {
+            $.ajax({
+                url: '/obter-dados-irrigacao/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (dados) {
+                    // Atualize os elementos HTML com os novos dados
+                    $('#sensor_valor').text('Valor do Sensor: ' + dados.umidade);
+                    $('#estado_irrigador').text('Estado do Irrigador: ' + dados.estado_irrigador);
+    
+                    var pathTorneiraAberta = window.location.origin + '/media/images/torneira.png';
+                    var pathTorneiraFechada = window.location.origin + '/media/images/torneira-fechada.png';
+                    // Atualize a imagem e os textos conforme necessário
+                    if (dados.umidade <= 450) {
+                        $('#icone_torneira').attr('src', pathTorneiraAberta);
+                        $('#mensagem_irrigador').text('IRRIGADOR LIGADO! A umidade do solo está baixa');
+                        $('#mensagem_irrigador').removeClass('p-style-d').addClass('p-style-l');
+                    } else {
+                        $('#icone_torneira').attr('src', pathTorneiraFechada);
+                        $('#mensagem_irrigador').text('IRRIGADOR DESLIGADO! A umidade do solo está alta');
+                        $('#mensagem_irrigador').removeClass('p-style-l').addClass('p-style-d');
+                    }
+                },
+                error: function (erro) {
+                    console.error('Erro ao obter dados de irrigação:', erro);
+                }
+            });
+        }
+    
+        // Chame a função uma vez para configurar o estado inicial
+        atualizarDadosIrrigacao();
+    
+        // Chame a função a cada 5 segundos (5000 milissegundos)
+        setInterval(atualizarDadosIrrigacao, 5000);
+    </script>
 </head>
 <body>
     {% include "global/partials/menu_principal.html" %}
@@ -16,58 +55,35 @@
     <div class="title">
         <h2 class="h2-titulo">Informações de irrigação da sua fazenda</h2><!--Nome da cultura-->
     </div>
-        <br>
-        <br>
-
-        <div class="row">
-            <div class="card">
-                <h2><strong>Estado</strong></h2>
-                <p  class="p-sty">No atual momento a irrigação está:</p>   
-                <br>         
-                <br>
-                <div class="card-content">                
-                    <div class="right-content">
-                        {% if sensor_valor <= 450 %}
-                            <img class="image" src="/media/images/torneira.png" alt="Ícone de torneira aberta" style="color: blue;"/>
-                            <p class="p-style-l">IRRIGADOR LIGADO!</p> <p class="p-sty">A umidade do solo está baixo</p>
-                        {% else %}
-                            <img class="image" src="/media/images/torneira-fechada.png" alt="Ícone de torneira fechada" style="color: blue;"/>
-                            <p class = "p-style-d">IRRIGADOR DESLIGADO!</p> <p class="p-sty">A umidade do solo está alta</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <div class="card2">
-                <h2><strong>Registro</strong></h2>
-                <p class="p-sty">Consulte como anda a irrigação dessa cultura por meio de um gráfico de colunas.</p>            
-                <div class="card-content">
-                    <div class="left-content">
-                        <div class="botao">
-                            <a href="{% url "products:grafico_irrigacao"%}">Consultar</a> 
-                        </div>
-                    </div>
-                    <div class="right-content">
-                        <img class="image" src="/media/images/grafico-de-barras.png" alt="Ícone de grafico" style="color: blue;"/>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <!--
-        <div class="previsao">
-            <div class="card3">
-                <div class="card-content">
-                    <div class="left-content">
-                        <p>Previsão do tempo: </p>
-                    </div>
-                    <div class="right-content">
-                        <img class="image" src="/media/images/ensolarado.png" alt="Ícone de sol" style="color: yellow;"/>
-                        <img class="image" src="/media/images/gota-de-chuva.png" alt="Ícone de chuva" style="color: blue;"/>
-                    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="card">
+            <h2><strong>Estado</strong></h2>
+            <p  class="p-sty">No atual momento a irrigação está:</p>   
+            <br>         
+            <br>
+            <div class="card-content">                
+                <div class="right-content">
+                    <img id="icone_torneira" class="image" src="" alt="Ícone de torneira" style="color: blue;"/>
+                    <p id="mensagem_irrigador" class="p-style-l"></p>
                 </div>
             </div>
         </div>
-        -->
+        <div class="card2">
+            <h2><strong>Registro</strong></h2>
+            <p class="p-sty">Consulte como anda a irrigação dessa cultura por meio de um gráfico de colunas.</p>            
+            <div class="card-content">
+                <div class="left-content">
+                    <div class="botao">
+                        <a href="{% url "products:grafico_irrigacao"%}">Consultar</a> 
+                    </div>
+                </div>
+                <div class="right-content">
+                    <img class="image" src="/media/images/grafico-de-barras.png" alt="Ícone de gráfico" style="color: blue;"/>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

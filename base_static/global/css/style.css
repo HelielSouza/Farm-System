@@ -37,8 +37,8 @@ header{
     transition: 0.8s;
 }
 
-.menu-container a:hover{
-    color: #F5F5DC;
+.menu a:hover {
+    color: rgba(146, 137, 137, 0.998);
 }
 
 
@@ -59,10 +59,12 @@ section.main{
 
 .text-chamada h1{
     font-size: 60px;
+    
 }
 
 .text-chamada h3{
     font-size: 30px;
+    
 }
 
 section.produtos{

@@ -58,7 +58,7 @@ while True:
         print(f'Temperature Sensor 1: {temperature1}°C ')
         print(f'Temperature Sensor 2: {temperature2}°C \n')
 
-        time.sleep(2)
+        time.sleep(0.5)
 
     except Exception as e:
         print(f"Erro na captação: {e}")

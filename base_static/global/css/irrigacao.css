@@ -49,16 +49,16 @@ body {
 }
 
 .menu a {
-    color: white;
+    color: rgba(255, 254, 254, 0.998);
     margin: 0px 10px;
     text-decoration: none;
     padding: 0px 10px;
     line-height: 40px;
-    transition: 0.8s;
+    transition: 0.4s;
 }
 
 .menu a:hover {
-    color: #F5F5DC;
+    color: rgba(146, 137, 137, 0.998);
 }
 
 .logo {

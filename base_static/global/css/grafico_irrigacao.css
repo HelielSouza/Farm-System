@@ -56,7 +56,7 @@ body {
 }
 
 .menu a:hover {
-    color: #F5F5DC;
+    color: rgba(146, 137, 137, 0.998);
 }
 
 .logo {

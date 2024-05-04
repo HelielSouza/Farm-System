@@ -169,8 +169,8 @@ body {
     transition: 0.8s;
 }
 
-.menu a:hover{
-    color: #F5F5DC;
+.menu a:hover {
+    color: rgba(146, 137, 137, 0.998);
 }
 
 .logo{

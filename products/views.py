@@ -1,16 +1,18 @@
-from .models import (GD, CulturaPlantacao, Previsao, Sensor, SomaTermica,
-                     UmidadeValores)
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from django.urls import reverse
-from django.shortcuts import redirect, render
-from django.db.models.functions import TruncDate
-from django.db.models import Count
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 import base64
 import io
 
 import matplotlib
+import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+from django.db.models import Count
+from django.db.models.functions import TruncDate
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+from .models import (GD, CulturaPlantacao, Previsao, Sensor, SomaTermica,
+                     UmidadeValores)
 
 matplotlib.use('Agg')
 
@@ -124,6 +126,15 @@ def irrigacao(request):
     return render(request, 'products/pages/irrigacao.html', {
         'sensor_valor': ultimo_valor.umidade,
     })
+
+
+def obter_dados_irrigacao(request):
+    ultimo_valor = UmidadeValores.objects.latest('timestamp')
+    dados_irrigacao = {
+        'umidade': ultimo_valor.umidade,
+        'estado_irrigador': 'Ligado' if ultimo_valor.umidade <= 450 else 'Desligado',  # noqa E501
+    }
+    return JsonResponse(dados_irrigacao)
 
 
 def grafico_irrigacao(request):

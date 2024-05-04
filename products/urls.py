@@ -17,5 +17,7 @@ urlpatterns = [
     path('irrigacao/', views.irrigacao, name='irrigacao'),
     path('grafico-irrigacao/', views.grafico_irrigacao,
          name='grafico_irrigacao'),
+    path('obter-dados-irrigacao/', views.obter_dados_irrigacao,
+         name='obter_dados_irrigacao'),
 
 ]
